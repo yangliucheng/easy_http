@@ -6,4 +6,7 @@ type Router struct {
 	Path    string
 }
 
+type Handlers map[string]HandlerFun
+
+type HandlerFun func()
 type RouterArray []Router

@@ -12,7 +12,7 @@ func StringJoin(str ...string) string {
 		buffer.WriteString(s)
 	}
 
-	return buffer.String
+	return buffer.String()
 }
 
 func ParaseUrlParam(url string, params map[string]string) string {

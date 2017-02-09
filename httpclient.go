@@ -1,8 +1,7 @@
 package easy_http
 
 import (
-	"easy_http/utils"
-	"fmt"
+	"github.com/yangliucheng/easy_http/utils"
 	"io"
 	"net/http"
 	"strings"
@@ -36,7 +35,7 @@ func createHttpClient(timeout time.Duration) *http.Client {
 /**
  * the function declare SSH transmit
  */
-func CreateHttpsClient() {
+func createHttpsClient() {
 
 }
 
@@ -46,7 +45,7 @@ func CreateHttpsClient() {
  * @param body
  * @param fParam : param of table ,such as /getname?xxx
  */
-func (requestGen *RequestGen) CreateRequest(handler string, param Mapstring, body io.Reader, header Mapstring, fParam string) (*http.Request, error) {
+func (requestGen *RequestGen) createRequest(handler string, param Mapstring, body io.Reader, header Mapstring, fParam string) (*http.Request, error) {
 	// fParam is a form param of url
 	router := requestGen.lookUrl(handler)
 	path := router.Path
@@ -80,9 +79,7 @@ func (requestGen *RequestGen) CreateRequest(handler string, param Mapstring, bod
 func (requestGen *RequestGen) lookUrl(handler string) *Router {
 
 	router := new(Router)
-
 	for _, r := range requestGen.Routers {
-
 		if strings.EqualFold(r.Handler, handler) {
 			*router = r
 		}
@@ -96,7 +93,7 @@ func (requestGen *RequestGen) DoHttpRequest(handler string, param Mapstring, bod
 	timeout := 100 * time.Second
 	client := createHttpClient(timeout)
 
-	request, err := requestGen.CreateRequest(handler, param, body, header, fParam)
+	request, err := requestGen.createRequest(handler, param, body, header, fParam)
 	if err != nil {
 		return nil, err
 	}

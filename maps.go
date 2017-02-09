@@ -1,3 +1,3 @@
 package easy_http
 
-var Mapstring map[string]string
+type Mapstring map[string]string
