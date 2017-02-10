@@ -54,14 +54,13 @@ func (requestGen *RequestGen) createRequest(handler string, param Mapstring, bod
 		path = utils.ParaseUrlParam(router.Path, param)
 	}
 
-	endpoint := utils.StringJoin(requestGen.Host, path)
+	endpoint := utils.StringJoin("http://",requestGen.Host, path)
 	// 设置表单参数
 	if !strings.EqualFold(fParam, "") {
 		endpoint = utils.StringJoin(endpoint, "?query=", fParam)
 	}
 
 	request, err := http.NewRequest(router.Method, endpoint, body)
-
 	if err != nil {
 		return request, err
 	}
@@ -72,7 +71,6 @@ func (requestGen *RequestGen) createRequest(handler string, param Mapstring, bod
 			request.Header.Set(key, value)
 		}
 	}
-
 	return request, nil
 }
 

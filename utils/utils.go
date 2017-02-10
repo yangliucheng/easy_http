@@ -16,12 +16,11 @@ func StringJoin(str ...string) string {
 }
 
 func ParaseUrlParam(url string, params map[string]string) string {
-
-	// /v2/apps/:app_id map[app_id:/super/admin]
+	// easy_http.Mapstring{"namespace": "default"}
+	// /api/v1/namespaces/:namespace/pods
 	for k, v := range params {
-		//判断v是不是以/开始
-		if !StartWith(v, `/`) {
-			k = StringJoin(`/:`, k)
+		if !StartWith(k, ":") {
+			k = StringJoin(":",k)
 		}
 		url = strings.Replace(url, k, v, -1)
 	}
